@@ -2,3 +2,98 @@
 @use '../../styles/partials/colors' as *;
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
+
+.loginpage {
+    min-width: 320px;
+
+    @include tablet {
+        display: flex;
+    }
+
+    @include desktop {
+        width: 1280px;
+    }
+
+    &__hero {
+        background-color: $purple;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet {
+            width: 40%;
+        }
+    }
+
+    &__logo {
+        width: 200px;
+        height: 200px;
+    }
+
+    &__container {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: lavender;
+
+        @include tablet {
+            width: 60%;
+            justify-content: center;
+        }
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__form--label {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 320px;
+    }
+
+    &__form--label span {
+        align-self: flex-start;
+        margin-top: 1rem;
+    }
+
+    &__form--email, &__form--password {
+        margin: 0.3rem 0 0;
+        width: 100%;
+        max-width: 320px;
+        height: 2rem;
+        background-color: $pink;
+        border: none;
+        border-radius: 4px;
+    }
+
+    &__form--button {
+        width: 10rem;
+        height: 10rem;
+        margin: 2rem 0 0.5rem;
+        background-color: $greyblue;
+        border: none;
+        border-radius: 50%;
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+
+        &:hover {
+            background-color: $blue;
+            box-shadow: 0 0 150px 0 black;
+        }
+    }
+
+    &__link {
+        margin-top: 2rem;
+        font-size: 12px;
+    }
+}
