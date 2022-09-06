@@ -5,9 +5,11 @@
 
 .loginpage {
     min-width: 320px;
+    height: 100vh;
 
     @include tablet {
         display: flex;
+        align-items: center;
     }
 
     @include desktop {
@@ -22,6 +24,7 @@
 
         @include tablet {
             width: 40%;
+            height: 700px;
         }
     }
 
@@ -41,6 +44,7 @@
         @include tablet {
             width: 60%;
             justify-content: center;
+            height: 700px;
         }
     }
 

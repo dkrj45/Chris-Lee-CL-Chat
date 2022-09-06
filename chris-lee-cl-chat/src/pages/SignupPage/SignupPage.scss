@@ -5,9 +5,11 @@
 
 .signuppage {
     min-width: 320px;
+    height: 100vh;
 
     @include tablet {
         display: flex;
+        align-items: center;
     }
 
     @include desktop {
@@ -19,11 +21,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 18.75rem;
+        height: 300px;
 
         @include tablet {
             width: 40%;
-            height: 835px;
+            height: 700px;
         }
     }
 
@@ -43,6 +45,7 @@
         @include tablet {
             width: 60%;
             justify-content: center;
+            height: 700px;
         }
     }
 
