@@ -3,7 +3,7 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
 
-.signuppage {
+.loginpage {
     min-width: 320px;
     height: 100vh;
 
@@ -21,7 +21,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 300px;
+        height: 320px;
 
         @include tablet {
             width: 40%;
@@ -70,18 +70,15 @@
         margin-top: 1rem;
     }
 
-    &__form--email, &__form--password, &__form--name, &__form--confirm-password {
+    &__form--email, &__form--password {
         margin: 0.3rem 0 0;
         width: 100%;
         max-width: 320px;
         height: 2rem;
         background-color: $pink;
         border: none;
-        border-radius: 4px;
-    }
-
-    &__form--confirm-password--error {
-        border: solid red 4px;
+        border-radius: 1rem;
+        padding-left: 1rem;
     }
 
     &__form--button {

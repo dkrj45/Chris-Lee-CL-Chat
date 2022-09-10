@@ -6,7 +6,7 @@ function LoginPage() {
     let navigate = useNavigate()
 
     const clickHandler = () => {
-        navigate('/ConversationPage')
+        navigate('/RoomsPage')
     }
 
     return (
