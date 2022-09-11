@@ -85,6 +85,12 @@
         border: solid red 3px;
     }
 
+    &__error-message--email, &__error-message--confirm-password {
+        align-self: flex-start;
+        color: red;
+        margin: 0.5rem;
+    }
+
     &__form--button {
         width: 10rem;
         height: 10rem;
