@@ -82,7 +82,7 @@ function SignupPage() {
   const clickHandler = (e) => {
     e.preventDefault()
     
-    const name = form.name.value
+    const name = form.name.value;
 
     if(name==="" || email==="" || password==="" || confirmPassword===""){
       alert("please fill in all the fields.")

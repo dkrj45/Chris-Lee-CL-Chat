@@ -28,6 +28,8 @@ function LoginPage() {
                     <button onClick={clickHandler} className='loginpage__form--button'>Sign In</button>
                 </form>
                 <h2 className='loginpage__link'>New to CL Chat? <Link to='/SignupPage'>Sign Up</Link></h2>
+                <div className='loginpage__or'><h3>or</h3></div>
+                <button className='loginpage__guest'>Sign in as a Guest</button>
             </div>
         </div>
     );
