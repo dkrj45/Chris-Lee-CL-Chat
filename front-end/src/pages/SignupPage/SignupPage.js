@@ -16,8 +16,11 @@ function SignupPage() {
     const password = form.password.value
     const confirmPassword = form.confirmPassword.value
     if(name==="" || email==="" || password==="" || confirmPassword===""){
-      alert("please fill in all the fields")
-    } else if(password!==confirmPassword){
+      alert("please fill in all the fields.")
+    } else if(!(email.includes('@')) || !(email.includes('.'))){
+      alert('Please enter a valid email.')
+    }
+      else if(password!==confirmPassword){
       alert("Passwords do not match. Please try again.")
       document.querySelector(".signuppage__form--confirm-password").classList.add("signuppage__form--confirm-password--error")
     } else{

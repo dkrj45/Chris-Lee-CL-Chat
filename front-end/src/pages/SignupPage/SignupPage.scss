@@ -81,8 +81,8 @@
         padding-left: 1rem;
     }
 
-    &__form--confirm-password--error {
-        border: solid red 4px;
+    &__form--confirm-password--error, &__form--email--error {
+        border: solid red 3px;
     }
 
     &__form--button {
