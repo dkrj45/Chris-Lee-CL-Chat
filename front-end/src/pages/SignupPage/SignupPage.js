@@ -1,20 +1,50 @@
 import './SignupPage.scss'
 import {Link, useNavigate} from 'react-router-dom'
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function SignupPage() {
 
   let navigate = useNavigate()
 
   const formRef = useRef()
+  const form = formRef.current
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const changeEmail=()=>{
+    setEmail(form.email.value)
+  }
+
+  const changePassword=()=>{
+    setPassword(form.password.value)
+  }
+
+  const changeConfirmPassword=()=>{
+    setConfirmPassword(form.confirmPassword.value)
+  }
+
+  const isEmailValid=()=>{
+    if(!email){
+      console.log('false')
+      return false
+    }
+    if(!(email.includes('@')) || !(email.includes('.'))){
+      document.querySelector(".signuppage__form--email").classList.add("signuppage__form--email--error")
+      return false;
+    } else {
+      document.querySelector(".signuppage__form--email").classList.remove("signuppage__form--email--error")
+      return true;
+    }
+    
+  }
 
   const clickHandler = (e) => {
     e.preventDefault()
-    const form = formRef.current
+    
     const name = form.name.value
-    const email = form.email.value
-    const password = form.password.value
-    const confirmPassword = form.confirmPassword.value
+
     if(name==="" || email==="" || password==="" || confirmPassword===""){
       alert("please fill in all the fields.")
     } else if(!(email.includes('@')) || !(email.includes('.'))){
@@ -44,15 +74,15 @@ function SignupPage() {
                 </label>
                 <label className='signuppage__form--label'>
                     <span>Email:</span>
-                    <input className='signuppage__form--email' type='email' name='email' placeholder='email@website.com'></input>
+                    <input onChange={changeEmail} onBlur={isEmailValid} className='signuppage__form--email' type='email' name='email' placeholder='email@website.com'></input>
                 </label>
                 <label className='signuppage__form--label'>
                     <span>Password:</span>
-                    <input className='signuppage__form--password' type='text' name='password' placeholder='password'></input>
+                    <input onChange={changePassword} className='signuppage__form--password' type='text' name='password' placeholder='password'></input>
                 </label>
                 <label className='signuppage__form--label'>
                     <span>Confirm Password:</span>
-                    <input id="confirmPassword" className='signuppage__form--confirm-password' type='text' name='confirmPassword' placeholder='confirm password'></input>
+                    <input onChange={changeConfirmPassword} id="confirmPassword" className='signuppage__form--confirm-password' type='text' name='confirmPassword' placeholder='confirm password'></input>
                 </label>
                 <button onClick={clickHandler} className='signuppage__form--button'>Create Account</button>
             </form>
