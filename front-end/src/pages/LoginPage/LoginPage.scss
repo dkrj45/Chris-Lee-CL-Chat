@@ -12,10 +12,6 @@
         align-items: center;
     }
 
-    @include desktop {
-        width: 1280px;
-    }
-
     &__hero {
         background-color: $purple;
         display: flex;
@@ -24,8 +20,8 @@
         height: 320px;
 
         @include tablet {
-            width: 40%;
-            height: 700px;
+            width: 60%;
+            height: 100vh;
         }
     }
 
@@ -40,12 +36,17 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        background-color: lavender;
+        background-color: $lavender;
+        min-height: 100vh;
 
         @include tablet {
-            width: 60%;
+            width: 40%;
             justify-content: center;
-            height: 700px;
+            height: 100vh;
+        }
+
+        @include desktop {
+            padding: 4rem;
         }
     }
 
@@ -55,6 +56,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+
+        @include desktop {
+            max-width: 375px;
+        }
     }
 
     &__form--label {
@@ -62,7 +67,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 320px;
     }
 
     &__form--label span {
@@ -73,7 +77,6 @@
     &__form--email, &__form--password {
         margin: 0.3rem 0 0;
         width: 100%;
-        max-width: 320px;
         height: 2rem;
         background-color: $pink;
         border: none;
@@ -88,10 +91,9 @@
         padding: 0 1rem;
         height: 2rem;
         width: 100%;
-        max-width: 320px;
         color: white;
         font-weight: 600;
-        margin: 2rem;
+        margin: 2rem 0 1rem;
 
         &:hover {
             background-color: $blue;
@@ -102,21 +104,27 @@
     &__link {
         margin: 0;
         font-size: 12px;
+        align-self: flex-end;
     }
 
     &__or {
-        border-radius: 3px;
-        background-color: $grey;
-        width: 5rem;
-        height: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        margin: 1rem;
+        width: 100%; 
+        text-align: center; 
+        border-bottom: 1px solid #000; 
+        line-height: 0.1em;
+        margin: 2rem 0; 
 
-        h3{
-            margin: 0;
+        span {
+            background: $lavender; 
+            padding:0 10px; 
+        }
+    }
+
+    &__other-options {
+        width: 100%;
+
+        @include desktop {
+          max-width: 375px;  
         }
     }
 
@@ -127,7 +135,6 @@
         padding: 0 1rem;
         height: 2rem;
         width: 100%;
-        max-width: 320px;
         color: white;
         font-weight: 600;
 

@@ -18,7 +18,7 @@ function SignupPage() {
   }
 
   const changePassword=()=>{
-    setPassword(form.password.value);
+    setPassword(form.password.value)
   }
 
   const changeConfirmPassword=()=>{
@@ -92,8 +92,7 @@ function SignupPage() {
       else if(!isConfirmPasswordValid()){
       alert("Passwords do not match. Please try again.")
     } else{
-      alert("Your account has been successfully created! Please log in with your new account.")
-      navigate('/Loginpage')
+      navigate('/RoomsPage')
     }
   }
 
@@ -103,7 +102,7 @@ function SignupPage() {
             <img className='signuppage__logo' src={require('../../assets/images/cl-chat-logo.jpg')} alt='CL-Chat Logo' />
         </div>
         <div className='signuppage__container'>
-            <h1>Sign Up</h1>
+            <h1>SIGN UP</h1>
             <form ref={formRef} className='signuppage__form'>
                 <label className='signuppage__form--label'>
                     <span>Name:</span>
@@ -121,9 +120,9 @@ function SignupPage() {
                     <span>Confirm Password:</span>
                     <input onChange={changeConfirmPassword} onBlur={isConfirmPasswordValid} id="confirmPassword" className='signuppage__form--confirm-password' type='text' name='confirmPassword' placeholder='confirm password'></input>
                 </label>
-                <button onClick={clickHandler} className='signuppage__form--button'>Create Account</button>
+                <button onClick={clickHandler} className='signuppage__form--button'>Create Account & Sign In</button>
+                <h2 className='signuppage__link'>Already have an account? <Link to='/LoginPage'>Login</Link></h2>
             </form>
-            <h2 className='signuppage__link'>Already have an account? <Link to='/LoginPage'>Login</Link></h2>
         </div>
     </div>
   );

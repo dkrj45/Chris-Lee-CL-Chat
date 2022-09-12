@@ -40,10 +40,5 @@
     font-weight: 400;
     margin: 0;
     padding: 0;
-    background-color: $grey;
-
-    @include desktop {
-    display: flex;
-    justify-content: center;
-    }
+    background-color: $lavender;
   }
