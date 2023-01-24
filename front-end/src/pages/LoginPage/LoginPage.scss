@@ -52,14 +52,11 @@
 
     &__form {
         width: 100%;
+        max-width: 375px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-
-        @include desktop {
-            max-width: 375px;
-        }
     }
 
     &__form--label {
@@ -122,6 +119,7 @@
 
     &__other-options {
         width: 100%;
+        max-width: 375px;
 
         @include desktop {
           max-width: 375px;  
