@@ -7,13 +7,17 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import './App.scss'
 
 function App() {
+
+  //server-side URL
+  const URL = process.env.URL || "http://localhost:8080";
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Navigate to='/LoginPage' />}></Route>
-          <Route path='/LoginPage' element={<LoginPage />}></Route>
-          <Route path='/SignupPage' element={<SignupPage />}></Route>
+          <Route path='/LoginPage' element={<LoginPage URL={URL}/>}></Route>
+          <Route path='/SignupPage' element={<SignupPage URL={URL}/>}></Route>
           <Route path='/RoomsPage' element={<RoomsPage />}></Route>
           <Route path='/ConversationPage' element={<ConversationPage />}></Route>
           <Route path='*' element={<NotFoundPage />}></Route>
