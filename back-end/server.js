@@ -1,15 +1,16 @@
-//express, dotenv, helmet, socket.io installed
+//express, cors, dotenv, helmet, socket.io, yup installed
 //client-side and server-side form validation,
 const express = require("express");
 const app = express();
-
+const cors = require("cors")
 require('dotenv').config();
-const PORT = process.env.PORT || 8080;
-const URL = process.env.URL || "http://localhost:3000";
-
 const helmet = require("helmet");
-
 const { Server } = require("socket.io");
+const authRouter = require("./routes/authRouter")
+
+const PORT = process.env.PORT || 8080;
+//client-side URL
+const URL = process.env.URL || "http://localhost:3000";
 
 const server = require("http").createServer(app);
 
@@ -22,7 +23,15 @@ const io = new Server(server, {
 });
 
 app.use(helmet());
+
+app.use(cors({
+    origin: URL,
+    credentials: true
+}))
+
 app.use(express.json());
+
+app.use("/auth", authRouter)
 
 app.get('/', (req, res) => {
     res.send("Welcome to CL Chat's Server")
