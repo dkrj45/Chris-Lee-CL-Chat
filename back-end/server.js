@@ -1,4 +1,3 @@
-//express, cors, dotenv, helmet, socket.io, yup installed
 //client-side and server-side form validation,
 const express = require("express");
 const app = express();
@@ -7,6 +6,7 @@ require('dotenv').config();
 const helmet = require("helmet");
 const { Server } = require("socket.io");
 const authRouter = require("./routes/authRouter")
+const session = require("express-session")
 
 const PORT = process.env.PORT || 8080;
 //client-side URL
@@ -30,6 +30,19 @@ app.use(cors({
 }))
 
 app.use(express.json());
+
+app.use(session({
+    secret: process.env.COOKIE_SECRET,
+    credentials: true,
+    name: "sid",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.ENVIRONMENT === "production",
+        httpOnly: true,
+        sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+    }
+}))
 
 app.use("/auth", authRouter)
 
