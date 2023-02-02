@@ -5,7 +5,15 @@ const pool = require("../db");
 const Yup = require("yup");
 const bcrypt = require("bcrypt");
 
-router.post("/login", validateForm({
+router.route("/login")
+.get(async (req,res)=> {
+    if(req.session.user && req.session.user.username){
+        res.json({loggedIn: true, username: req.session.user.username})
+    } else {
+        res.json({loggedIn: false})
+    }
+})
+.post(validateForm({
     email: Yup.string().required("Email required").min(5, "Invalid Email"),
     password: Yup.string().required("Password required").min(1, "Invalid Password")
 }), async (req, res) => {
@@ -26,20 +34,17 @@ router.post("/login", validateForm({
                 loggedIn: true,
                 username: req.body.email
             })
-            console.log("login success")
         } else {
             res.json({
                 loggedIn: false,
                 status: "Wrong password"
             })
-            console.log("not matching pw")
         }
     } else {
         res.json({
             loggedIn: false,
             status: "Wrong username and/or password"
         })
-        console.log("Wrong email or password")
     }
 })
 
