@@ -5,7 +5,7 @@ import { AccountContext } from '../../components/AccountContext';
 
 function SignupPage({ URL }) {
   const {setUser} = useContext(AccountContext)
-  const {error,setError} = useState(null)
+  const [error,setError] = useState(null)
   let navigate = useNavigate();
 
   let [emailWarning, setEmailWarning] = useState(false)
@@ -60,12 +60,9 @@ function SignupPage({ URL }) {
       }).then(data => {
         if(!data) return;
         setUser({...data})
-        console.log(data)
         if(data.status){
           setError(data.status)
-          console.log(data.status)
         } else if(data.signedUp){
-          console.log(data.signedUp)
           alert("You have successfully registered the account. Please log-in using the account you created.")
           navigate('/LoginPage');
         }
@@ -81,7 +78,7 @@ function SignupPage({ URL }) {
       </div>
       <div className='signuppage__container'>
         <h1>SIGN UP</h1>
-        <h2>{error}</h2>
+        <h2 className='signuppage__error'>{error}</h2>
         <form onSubmit={clickHandler} className='signuppage__form'>
           <label className='signuppage__form--label'>
             <span>Name:</span>

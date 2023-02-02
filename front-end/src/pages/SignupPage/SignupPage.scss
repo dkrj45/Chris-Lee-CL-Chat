@@ -12,6 +12,11 @@
         align-items: center;
     }
 
+    &__error{
+        color: red;
+        margin: 0;
+    }
+
     &__hero {
         background-color: $purple;
         display: flex;

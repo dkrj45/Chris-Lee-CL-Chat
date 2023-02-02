@@ -1,11 +1,11 @@
 import './LoginPage.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { AccountContext } from '../../components/AccountContext';
 
 function LoginPage({ URL }) {
   const { setUser } = useContext(AccountContext);
-  const {error, setError} = useState(null);
+  const [error, setError] = useState(null);
   let navigate = useNavigate()
 
   const clickHandler = (e) => {
@@ -31,19 +31,13 @@ function LoginPage({ URL }) {
     }).then(data => {
       if (!data) return;
       setUser({ ...data })
-      console.log(data)
       if(data.status){
         setError(data.status);
       } else if(data.loggedIn){
-        console.log(data.loggedIn)
         navigate('/HomePage');
       }
     })
   }
-
-  // useEffect(()=>{
-    
-  // }, error)
 
   return (
     <div className='loginpage'>
