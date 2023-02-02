@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-const { createContext, useState, useEffect } = require("react");
+const { createContext, useState, useEffect} = require("react");
 
 export const AccountContext = createContext();
 
 const UserContext = ({ children }) => {
+    const URL = process.env.URL || "http://localhost:8080";
     const [user, setUser] = useState({ loggedIn: null });
     const navigate = useNavigate();
     useEffect(() => {

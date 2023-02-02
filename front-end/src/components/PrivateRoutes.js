@@ -4,7 +4,7 @@ import { AccountContext } from "./AccountContext";
 const { Outlet, Navigate } = require("react-router-dom")
 
 const useAuth = () => {
-    const user = useContext(AccountContext)
+    const {user} = useContext(AccountContext)
     return user && user.loggedIn;
 }
 
