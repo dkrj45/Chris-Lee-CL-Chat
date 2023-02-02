@@ -67,9 +67,7 @@ router.post("/signup", validateForm({
             signedUp: true,
             username: req.body.email
         })
-        console.log("Register successful")
     } else {
-        console.log("This email is taken")
         res.json({
             signedUp: false,
             status: "Username taken"
