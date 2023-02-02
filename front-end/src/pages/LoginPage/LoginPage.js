@@ -6,11 +6,12 @@ function LoginPage( {URL}) {
     let navigate = useNavigate()
 
     const clickHandler = (e) => {
+      e.preventDefault();
         const creds = {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        navigate('/RoomsPage')
+        
         console.log(creds)
         fetch(`${URL}/auth/login`, {
             method: "POST",
@@ -28,7 +29,9 @@ function LoginPage( {URL}) {
             return res.json()
           }).then(data => {
             if(!data) return;
-            console.log(data);
+            console.log(data)
+            navigate('/HomePage');
+            console.log("successfully logged in")
           })
     }
 
@@ -46,7 +49,7 @@ function LoginPage( {URL}) {
                     </label>
                     <label className='loginpage__form--label'>
                         <span>Password:</span>
-                        <input className='loginpage__form--password' type='text' name='password' placeholder='password'></input>
+                        <input className='loginpage__form--password' type='password' name='password' placeholder='password'></input>
                     </label>
                     <button className='loginpage__form--button'>Sign In</button>
                     <h2 className='loginpage__link'>New to CL Chat? <Link to='/SignupPage'>Sign Up</Link></h2>

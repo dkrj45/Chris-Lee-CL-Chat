@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './pages/LoginPage/LoginPage'
 import SignupPage from './pages/SignupPage/SignupPage'
-import ConversationPage from './pages/ConversationPage/ConversationPage';
-import RoomsPage from './pages/RoomsPage/RoomsPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import './App.scss'
+import HomePage from './pages/HomePage/HomePage';
 
 function App() {
 
@@ -15,12 +14,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Navigate to='/LoginPage' />}></Route>
-          <Route path='/LoginPage' element={<LoginPage URL={URL}/>}></Route>
-          <Route path='/SignupPage' element={<SignupPage URL={URL}/>}></Route>
-          <Route path='/RoomsPage' element={<RoomsPage />}></Route>
-          <Route path='/ConversationPage' element={<ConversationPage />}></Route>
-          <Route path='*' element={<NotFoundPage />}></Route>
+          <Route path='/' element={<Navigate to='/LoginPage' />} />
+          <Route path='/LoginPage' element={<LoginPage URL={URL}/>} />
+          <Route path='/SignupPage' element={<SignupPage URL={URL}/>} />
+          <Route path='/HomePage' element={<HomePage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </div>

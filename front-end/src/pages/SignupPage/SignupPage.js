@@ -40,9 +40,8 @@ function SignupPage({ URL }) {
       setPasswordWarning(false)
     }
     if (!(name === "" || email === "" || password === "" || confirmPassword === "") && confirmPassword === password && ((email.includes('@') === true) && (email.includes('.') === true))) {
-      navigate('/LoginPage')
-      alert("Account registered! Please sign in.")
-      fetch(`${URL}/auth/register`, {
+      
+      fetch(`${URL}/auth/signup`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -58,7 +57,8 @@ function SignupPage({ URL }) {
         return res.json()
       }).then(data => {
         if(!data) return;
-        console.log(data);
+        navigate('/HomePage');
+        console.log("sign up complete")
       })
     }
 
@@ -83,11 +83,11 @@ function SignupPage({ URL }) {
           </label>
           <label className='signuppage__form--label'>
             <span>Password:</span>
-            <input className='signuppage__form--password' type='text' name='password' placeholder='password'></input>
+            <input className='signuppage__form--password' type='password' name='password' placeholder='password'></input>
           </label>
           <label id='label__confirm-password' className='signuppage__form--label'>
             <span>Confirm Password:</span>
-            <input id="confirmPassword" className='signuppage__form--confirm-password' type='text' name='confirmPassword' placeholder='confirm password'></input>
+            <input id="confirmPassword" className='signuppage__form--confirm-password' type='password' name='confirmPassword' placeholder='confirm password'></input>
             {passwordWarning ? <h3 className='signuppage__error-message--confirm-password'>Your passwords are not matching.</h3> : ''}
           </label>
           <button className='signuppage__form--button'>Create Account</button>
