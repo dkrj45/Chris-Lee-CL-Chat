@@ -1,9 +1,10 @@
 import './HomePage.scss'
+import logo from "../../assets/images/cl-chat-logo.jpg";
 
 function HomePage() {
   return (
-    <div>
-        placeholder for HomePage
+    <div className='homepage'>
+      hmm
     </div>
   );
 }

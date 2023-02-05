@@ -59,10 +59,6 @@ function LoginPage({ URL }) {
           <button className='loginpage__form--button'>Sign In</button>
           <h2 className='loginpage__link'>New to CL Chat? <Link to='/SignupPage'>Sign Up</Link></h2>
         </form>
-        <h2 className='loginpage__or'><span>OR</span></h2>
-        <div className='loginpage__other-options'>
-          <button className='loginpage__guest'>Sign in as a Guest</button>
-        </div>
       </div>
     </div>
   );
