@@ -7,6 +7,8 @@ const helmet = require("helmet");
 const { Server } = require("socket.io");
 const authRouter = require("./routes/authRouter")
 const session = require("express-session")
+const RedisStore = require("connect-redis")(session)
+const redisClient = require("./redis");
 
 const PORT = process.env.PORT || 8080;
 //client-side URL
@@ -35,6 +37,7 @@ app.use(session({
     secret: process.env.COOKIE_SECRET,
     credentials: true,
     name: "sid",
+    store: new RedisStore({client: redisClient}),
     resave: false,
     saveUninitialized: false,
     cookie: {
