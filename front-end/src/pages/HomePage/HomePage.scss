@@ -4,5 +4,9 @@
 @use '../../styles/partials/variables' as *;
 
 .homepage {
-    width: 100%;
+    @include tablet {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
 }

@@ -8,6 +8,10 @@
     box-sizing: border-box;
   }
   
+  h1, h2, h3, p, span {
+    color: $darkpurple;
+  }
+
   //Page Header
   h1 {
     font-family: "Avenir";
@@ -40,5 +44,5 @@
     font-weight: 400;
     margin: 0;
     padding: 0;
-    background-color: $lavender;
+    background-color: $darkgrey;
   }

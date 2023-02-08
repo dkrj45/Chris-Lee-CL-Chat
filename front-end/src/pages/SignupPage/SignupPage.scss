@@ -18,7 +18,7 @@
     }
 
     &__hero {
-        background-color: $purple;
+        background-color: $charcoal;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -41,7 +41,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        background-color: $lavender;
+        background-color: $white;
 
         @include tablet {
             width: 40%;
@@ -79,7 +79,7 @@
         margin: 0.3rem 0 0;
         width: 100%;
         height: 3rem;
-        background-color: $pink;
+        background-color: $teagreen;
         border: none;
         border-radius: 1rem;
         padding-left: 1rem;
@@ -96,19 +96,18 @@
     }
 
     &__form--button {
-        background-color: $greyblue;
+        background-color: $sunglow;
         border: none;
         border-radius: 1rem;
         padding: 0 1rem;
         height: 3rem;
         width: 100%;
-        color: white;
+        color: $darkpurple;
         font-weight: 600;
         margin: 2rem 0 0.5rem;
 
         &:hover {
-            background-color: $blue;
-            box-shadow: 0 0 150px 0 $blue;
+            background-color: $orange;
         }
     }
 
