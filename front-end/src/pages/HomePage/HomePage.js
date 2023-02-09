@@ -13,6 +13,11 @@ function HomePage() {
     {username: "Henna Bean", connected: false}
   ]);
   const [width, setWidth] = useState(window.innerWidth);
+  const [activeFriend, setActiveFriend] = useState(friends[0].username)
+
+  function onFriendClicked(friend) {
+    setActiveFriend(friend)
+  }
 
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth);
@@ -23,8 +28,8 @@ function HomePage() {
   return (
     <FriendContext.Provider value={{friends, setFriends}}>
       <div className='homepage'>
-        <FriendsList />
-        {width > 768 ? <Chat /> : ''}
+        <FriendsList onFriendClicked={onFriendClicked}/>
+        {width > 768 ? <Chat activeFriend={activeFriend} /> : ''}
       </div>
     </FriendContext.Provider>
   );

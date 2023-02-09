@@ -9,10 +9,11 @@ const AddFriendModal = ({ setModal }) => {
     const submitHandler = (e) => {
         e.preventDefault();
         alert(e.target.name.value)
+        e.target.reset();
     }
 
     return (
-        <div className="modal" >
+        <div className="modal" onClick={removeModal} >
             <div className="modal__content" onClick={e => { e.stopPropagation() }}>
                 <span className="modal__close" onClick={removeModal}>&times;</span>
                 <h1 className='modal__title'>Add a friend!</h1>
