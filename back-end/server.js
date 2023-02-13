@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const { Server } = require("socket.io");
 const authRouter = require("./routes/authRouter");
 const { sessionMiddleware, wrap } = require("./controllers/serverController");
-const { authorizeUser, initializeUser, addFriend } = require("./controllers/socketController");
+const { authorizeUser, initializeUser, addFriend, onDisconnect } = require("./controllers/socketController");
 
 
 const PORT = process.env.PORT || 8080;
@@ -40,12 +40,20 @@ app.get('/', (req, res) => {
     res.send("Welcome to CL Chat's Server")
   })
 
+if (process.env.NODE_ENV === "production") {
+    app.use((req, res) => {
+        res.sendFile(path.join(__dirname, "../front-end", "index.html"));
+    });
+}
+
 io.use(wrap(sessionMiddleware))
 io.use(authorizeUser);
 io.on("connect", socket => {
     initializeUser(socket);
 
     socket.on("add_friend", (friendName, cb)=>{addFriend(socket, friendName, cb)})
+
+    socket.on("disconnecting", () => onDisconnect(socket))
 })
 
 server.listen(PORT, ()=>{
