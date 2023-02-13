@@ -1,5 +1,6 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
+const {v4: uuidv4} = require("uuid");
 
 module.exports.handleLogin = (req, res) => {
     if(req.session.user && req.session.user.email){
@@ -11,7 +12,7 @@ module.exports.handleLogin = (req, res) => {
 
 module.exports.attemptLogin = async(req, res) => {
     const potentialLogin = await pool.query(
-        "SELECT id, username, email, passhash FROM users u WHERE u.email=$1",
+        "SELECT id, username, email, passhash, userid FROM users u WHERE u.email=$1",
         [req.body.email]
     )
 
@@ -21,7 +22,8 @@ module.exports.attemptLogin = async(req, res) => {
             req.session.user = {
                 username: potentialLogin.rows[0].username,
                 email: req.body.email,
-                id: potentialLogin.rows[0].id
+                id: potentialLogin.rows[0].id,
+                userid: potentialLogin.rows[0].userid
             }
             res.json({
                 loggedIn: true,
@@ -47,12 +49,13 @@ module.exports.attemptRegister = async(req, res) => {
     if (existingUser.rowCount === 0) {
         //register
         const hashedPass = await bcrypt.hash(req.body.password, 10)
-        const newUserQuery = await pool.query("INSERT INTO users(username, email, passhash) values ($1, $2, $3) RETURNING username",
-            [req.body.name, req.body.email, hashedPass]);
+        const newUserQuery = await pool.query("INSERT INTO users(username, email, passhash, userid) values ($1, $2, $3, $4) RETURNING id, username, email, userid",
+            [req.body.name, req.body.email, hashedPass, uuidv4()]);
         req.session.user = {
             username: req.body.name,
             email: req.body.email,
-            id: newUserQuery.rows[0].id
+            id: newUserQuery.rows[0].id,
+            userid: newUserQuery.rows[0].userid
         }
         res.json({
             signedUp: true,

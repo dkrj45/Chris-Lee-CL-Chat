@@ -1,14 +1,13 @@
-//client-side and server-side form validation,
 const express = require("express");
 const app = express();
 const cors = require("cors")
 require('dotenv').config();
 const helmet = require("helmet");
 const { Server } = require("socket.io");
-const authRouter = require("./routes/authRouter")
-const session = require("express-session")
-const RedisStore = require("connect-redis")(session)
-const redisClient = require("./redis");
+const authRouter = require("./routes/authRouter");
+const { sessionMiddleware, wrap } = require("./controllers/serverController");
+const { authorizeUser, initializeUser, addFriend } = require("./controllers/socketController");
+
 
 const PORT = process.env.PORT || 8080;
 //client-side URL
@@ -20,7 +19,7 @@ const io = new Server(server, {
     cors: {
         origin: URL,
         //credentials being true enables all cross-site cookies to travel over
-        credentials: "true",
+        credentials: true
     }
 });
 
@@ -33,20 +32,7 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(session({
-    secret: process.env.COOKIE_SECRET,
-    credentials: true,
-    name: "sid",
-    store: new RedisStore({client: redisClient}),
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.ENVIRONMENT === "production",
-        httpOnly: true,
-        expires: 1000 * 60 * 60 *24 * 7,
-        sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
-    }
-}))
+app.use(sessionMiddleware)
 
 app.use("/auth", authRouter)
 
@@ -54,8 +40,12 @@ app.get('/', (req, res) => {
     res.send("Welcome to CL Chat's Server")
   })
 
+io.use(wrap(sessionMiddleware))
+io.use(authorizeUser);
 io.on("connect", socket => {
-    console.log("socket connected")
+    initializeUser(socket);
+
+    socket.on("add_friend", (friendName, cb)=>{addFriend(socket, friendName, cb)})
 })
 
 server.listen(PORT, ()=>{
