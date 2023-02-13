@@ -23,8 +23,9 @@ function FriendsList({onFriendClicked}) {
           {friends.map(friend => {
             return (
               <div key={`friend:${friend}`} className='friends-list__list' onClick={() => onFriendClicked(friend)}>
+                {console.log(friend)}
                 <div className='friends-list__friend'>
-                  <span className={friend.connected ? "friends-list__status--available" : "friends-list__status--unavailable"}></span><h2 className='friends-list__name'>{friend}</h2>
+                  <span className={friend.connected ? "friends-list__status--available" : "friends-list__status--unavailable"}></span><h2 className='friends-list__name'>{friend.username}</h2>
                 </div>
               </div>
             )

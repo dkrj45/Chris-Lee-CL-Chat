@@ -15,9 +15,9 @@ const AddFriendModal = ({ setModal }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        socket.emit("add_friend", e.target.name.value, ({errorMsg, done})=>{
+        socket.emit("add_friend", e.target.name.value, ({errorMsg, done, newFriend})=>{
             if(done){
-                setFriends(c => [e.target.name.value, ...c])
+                setFriends(c => [newFriend, ...c])
                 setError("")
                 removeModal()
                 return;
