@@ -8,7 +8,6 @@
     max-width: 905px;
     min-height: 100vh;
     background-color: $white;
-    padding: 1rem;
 
     &__none {
         width: 100%;
@@ -22,6 +21,27 @@
 
         &-text {
             margin: 0;
+        }
+    }
+
+    &__top {
+        display: flex;
+        align-items: center;
+        background-color: $teagreen;
+        padding: 1rem;
+    }
+
+    &__back-button {
+        color: $darkpurple;
+        background-color: $sunglow;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-weight: bold;
+        margin: 0 1rem 0 0;
+
+        &:hover {
+            background-color: $orange;
         }
     }
 

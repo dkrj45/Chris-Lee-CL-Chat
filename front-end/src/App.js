@@ -11,7 +11,6 @@ function App() {
 
   //server-side URL
   const URL = process.env.URL || "http://localhost:8080";
-
   return (
     <div className="App">
       <BrowserRouter>

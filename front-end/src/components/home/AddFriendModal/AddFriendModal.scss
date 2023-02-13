@@ -43,6 +43,16 @@
         color: $white;
     }
 
+    &__error-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__error {
+        color: red;
+        margin: 0 0 1rem;
+    }
+
     &__form-label {
         color: $teagreen;
         display: flex;
