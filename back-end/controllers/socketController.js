@@ -48,7 +48,7 @@ module.exports.addFriend = async (socket, friendName, cb) => {
         cb({ done: false, errorMsg: "User does not exist." })
         return;
     }
-    if (currentFriendList && currentFriendList.indexOf(friendName) !== -1) {
+    if (currentFriendList && currentFriendList.indexOf(`${friendName}.${friend.userid}`) !== -1) {
         cb({ done: false, errorMsg: "Friend already added." })
         return;
     }
@@ -77,7 +77,7 @@ const parseFriendList = async friendList => {
     const newFriendList = [];
     for (let friend of friendList) {
         const parsedFriend = friend.split(".");
-        const friendConnected = await redisClient.hget(`userid${parsedFriend[0]}`, "connected")
+        const friendConnected = await redisClient.hget(`userid:${parsedFriend[0]}`, "connected")
         newFriendList.push({
             username: parsedFriend[0],
             userid: parsedFriend[1],
