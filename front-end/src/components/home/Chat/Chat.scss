@@ -6,7 +6,7 @@
 .chat {
     width: 70%;
     max-width: 905px;
-    min-height: 100vh;
+    height: 100vh;
     background-color: $white;
     position: relative;
 
@@ -52,7 +52,30 @@
 
     &__messages {
         width: 100%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 132px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow: auto;
+    }
+
+    &__message {
+        display: block;
+        width: min-content;
+        max-width: 50%;
+        padding: 1rem;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 5px 5px 18px $darkgrey;
+        margin: 1rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: $teagreen;
+
+        &--me{
+            @extend .chat__message;
+            align-self: flex-end;
+        }
     }
 
     &__form {

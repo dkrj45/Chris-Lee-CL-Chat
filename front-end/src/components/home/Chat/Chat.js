@@ -22,9 +22,15 @@ function Chat({ activeFriend, onReturn }) {
       <div className='chat__messages'>
         {messages.filter(msg => msg.to === activeFriend.userid || msg.from === activeFriend.userid).map(
           (message, idx) => (
-            <p>{message.content}</p>
+            <p className='chat__message'>{message.content}</p>
           )
         )}
+          <p className='chat__message'>asdf</p>
+          <p className='chat__message--me'>asasdsadfasdfsadfasdfasdfasdfasdfasdfasdfsaddsasdsadfasdfsadfa
+            white-space: pre-wrap;
+            word-wrap: break-word;sdfasdfas
+        white-space: pre-wrap;
+        word-wrap: break-word;dfasdfasdfasdfsad</p>
       </div>
       <form className='chat__form' onSubmit={handleSubmit}>
         <div className='chat__form-container'>
