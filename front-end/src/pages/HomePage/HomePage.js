@@ -5,14 +5,16 @@ import { useState, useEffect, createContext } from 'react';
 import useSocketSetup from '../../components/home/useSocketSetup';
 
 export const FriendContext = createContext();
+export const MessagesContext = createContext();
 
 function HomePage() {
 
   const [friends, setFriends] = useState([]);
-  
+
   const [width, setWidth] = useState(window.innerWidth);
   const [activeFriend, setActiveFriend] = useState(null);
   const [toggleChat, setToggleChat] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   function onFriendClicked(friend) {
     setActiveFriend(friend)
@@ -30,13 +32,15 @@ function HomePage() {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, [])
 
-  useSocketSetup(setFriends);
+  useSocketSetup(setFriends, setMessages);
 
   return (
-    <FriendContext.Provider value={{friends, setFriends}}>
+    <FriendContext.Provider value={{ friends, setFriends }}>
       <div className='homepage'>
-        {width < 768 && toggleChat? <Chat onReturn={onReturn} activeFriend={activeFriend} /> : <FriendsList onFriendClicked={onFriendClicked}/>}
-        {width >= 768 ? <Chat onReturn={onReturn} activeFriend={activeFriend} /> : ''}
+        <MessagesContext.Provider value={{messages, setMessages}}>
+          {width < 768 && toggleChat ? <Chat onReturn={onReturn} activeFriend={activeFriend} /> : <FriendsList onFriendClicked={onFriendClicked} />}
+          {width >= 768 ? <Chat onReturn={onReturn} activeFriend={activeFriend} /> : ''}
+        </MessagesContext.Provider>
       </div>
     </FriendContext.Provider>
   );

@@ -4,9 +4,9 @@ import AddFriendModal from '../AddFriendModal/AddFriendModal'
 import { useContext, useState } from 'react';
 import { FriendContext } from '../../../pages/HomePage/HomePage';
 
-function FriendsList({onFriendClicked}) {
+function FriendsList({ onFriendClicked }) {
   const { friends, setFriends } = useContext(FriendContext)
-  const [modal,setModal] = useState(false)
+  const [modal, setModal] = useState(false)
 
   const addFriend = () => {
     setModal(true)
@@ -23,16 +23,15 @@ function FriendsList({onFriendClicked}) {
           {friends.map(friend => {
             return (
               <div key={`friend:${friend}`} className='friends-list__list' onClick={() => onFriendClicked(friend)}>
-                {console.log(friend)}
                 <div className='friends-list__friend'>
-                  <span className={friend.connected ? "friends-list__status--available" : "friends-list__status--unavailable"}></span><h2 className='friends-list__name'>{friend.username}</h2>
+                  <span className={friend.connected === false || friend.connected === 'false' ? "friends-list__status--unavailable" : "friends-list__status--available"}></span><h2 className='friends-list__name'>{friend.username}</h2>
                 </div>
               </div>
             )
           })}
         </div>
       </div>
-      {modal?<AddFriendModal setModal={setModal}/>:''}
+      {modal ? <AddFriendModal setModal={setModal} /> : ''}
     </>
   );
 }
