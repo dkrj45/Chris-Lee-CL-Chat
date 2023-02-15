@@ -27,10 +27,7 @@ services:
     image: redis:7-alpine
     command: redis-server --appendonly yes
     ports:
-      - target: 6379
-        published: 6380
-        protocol: tcp
-        mode: host
+      - "6379:6379"
     volumes:
       - clchat_redis_data:/data
     restart: on-failure
