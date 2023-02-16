@@ -2,7 +2,7 @@ const express = require('express');
 const validateForm = require('../controllers/validateForm');
 const router = express.Router();
 const Yup = require("yup");
-const { handleLogin, attemptLogin, attemptRegister } = require('../controllers/authControllers');
+const { handleLogin, attemptLogin, attemptRegister } = require('../controllers/authControllers.js');
 const { rateLimiter } = require('../controllers/rateLimiter');
 
 router.route("/login")

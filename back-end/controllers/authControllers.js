@@ -45,6 +45,11 @@ module.exports.attemptLogin = async(req, res) => {
 }
 
 module.exports.attemptRegister = async(req, res) => {
+    // const usersTable = await pool.query("SELECT users");
+    // console.log(usersTable)
+    // if(!usersTable){
+    //     await pool.query("CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR NOT NULL UNIQUE, email VARCHAR NOT NULL UNIQUE, passhash VARCHAR NOT NULL, userid VARCHAR NOT NULL UNIQUE)")
+    // }
     const existingUser = await pool.query("SELECT email from users WHERE email=$1", [req.body.email])
     if (existingUser.rowCount === 0) {
         //register

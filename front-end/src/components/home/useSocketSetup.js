@@ -12,6 +12,9 @@ const useSocketSetup = (setFriends, setMessages) => {
         socket.on("messages", messages => {
             setMessages(messages)
         })
+        socket.on("dm", message => {
+            setMessages(prevMsgs => [message, ...prevMsgs]);
+        })
         socket.on("connected", (status, username) => {
             setFriends(prevFriends => {
                 return [...prevFriends].map(friend => {

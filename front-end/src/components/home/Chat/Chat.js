@@ -1,36 +1,34 @@
 import './Chat.scss';
 import back from '../../../assets/icons/back.png'
+import socket from '../../../socket';
 import { useContext } from 'react';
 import { MessagesContext } from '../../../pages/HomePage/HomePage';
 
 function Chat({ activeFriend, onReturn }) {
-  const { messages } = useContext(MessagesContext);
+  const { messages, setMessages } = useContext(MessagesContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.message.value)
+    const message = {to: activeFriend.userid, from: null, content: e.target.message.value};
+    socket.emit("dm", message);
+    setMessages(prevMsgs => [message, ...prevMsgs])
     e.target.reset();
   }
 
   return activeFriend ? (
     <div className='chat'>
-      {console.log(activeFriend)}
       <div className='chat__top'>
         <button className='chat__back-button' onClick={onReturn}><img src={back} alt="back" /></button>
         <h1 className='chat__name'>{activeFriend.username}</h1>
       </div>
       <div className='chat__messages'>
         {messages.filter(msg => msg.to === activeFriend.userid || msg.from === activeFriend.userid).map(
-          (message, idx) => (
-            <p className='chat__message'>{message.content}</p>
+          (message) => (
+            message.to === activeFriend.userid?
+              <p className='chat__message--me'>{message.content}</p>
+            : <p className='chat__message'>{message.content}</p>
           )
         )}
-          <p className='chat__message'>asdf</p>
-          <p className='chat__message--me'>asasdsadfasdfsadfasdfasdfasdfasdfasdfasdfsaddsasdsadfasdfsadfa
-            white-space: pre-wrap;
-            word-wrap: break-word;sdfasdfas
-        white-space: pre-wrap;
-        word-wrap: break-word;dfasdfasdfasdfsad</p>
       </div>
       <form className='chat__form' onSubmit={handleSubmit}>
         <div className='chat__form-container'>
