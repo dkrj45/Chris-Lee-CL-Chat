@@ -1,10 +1,9 @@
-import {io} from "socket.io-client";
+import { io } from "socket.io-client";
 
-const URL = process.env.URL || "http://localhost:8080";
-
-const socket = new io(URL, {
-    autoConnect: false,
-    withCredentials: true
-})
+const socket = new io({
+  autoConnect: false,
+  withCredentials: true,
+  path: "/api/socket",
+});
 
 export default socket;
