@@ -15,8 +15,11 @@ const {
 } = require("./controllers/socketController");
 const knex = require("knex");
 const knexfile = require("./knexfile");
+const path = require("path");
 
+console.log("carpe diem");
 // run knex migrations
+console.log("NODE_ENV:",process.env.NODE_ENV);
 knex(knexfile[process.env.NODE_ENV || "development"]).migrate.latest();
 
 const PORT = process.env.PORT || 8080;
@@ -37,10 +40,7 @@ const io = new Server(server, {
 app.use(helmet());
 
 app.use(
-  cors({
-    origin: URL,
-    credentials: true,
-  })
+  cors()
 );
 
 app.use(express.json());
@@ -49,11 +49,7 @@ app.use(sessionMiddleware);
 
 app.use("/api/auth", authRouter);
 
-app.get("/", (req, res) => {
-  res.send("Welcome to CL Chat's Server");
-});
-
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV == "production") {
   const staticDir = path.join(__dirname, "../front-end");
   app.use(express.static(staticDir));
   app.use((req, res) => {

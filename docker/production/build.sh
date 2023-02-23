@@ -3,6 +3,8 @@
 rm -rf output
 mkdir -p output
 cd ../../
+rm -rf back-end/node_modules
+rm -rf front-end/node_modules
 docker buildx build -t clchat_app --platform linux/arm64 .
 cd docker/production
 

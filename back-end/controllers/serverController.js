@@ -11,10 +11,10 @@ const sessionMiddleware = session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         httpOnly: true,
         expires: 1000 * 60 * 60 *24 * 7,
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+        sameSite: "lax"
     }
 })
 
