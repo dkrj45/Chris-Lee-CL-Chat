@@ -4,9 +4,11 @@ WORKDIR /app
 
 # copy back-end
 COPY ./back-end ./back-end
+RUN rm -rf ./back-end/.env
 
 # copy front-end
 COPY ./front-end ./front-end
+RUN rm -rf ./front-end/.env
 
 # install dependencies in back-end
 WORKDIR /app/back-end
