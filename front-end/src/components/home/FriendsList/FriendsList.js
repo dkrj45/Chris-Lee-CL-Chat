@@ -3,13 +3,21 @@ import search from "../../../assets/icons/search.png";
 import AddFriendModal from "../AddFriendModal/AddFriendModal";
 import { useContext, useState } from "react";
 import { FriendContext } from "../../../pages/HomePage/HomePage";
+import { AccountContext } from "../../AccountContext";
+import socket from "../../../socket";
 
 function FriendsList({ onFriendClicked }) {
   const { friends, setFriends } = useContext(FriendContext);
   const [modal, setModal] = useState(false);
+  const { setUser } = useContext(AccountContext);
 
   const addFriend = () => {
     setModal(true);
+  };
+
+  const logout = () => {
+    setUser({ loggedIn: false });
+    socket.disconnect();
   };
 
   return (
@@ -42,6 +50,9 @@ function FriendsList({ onFriendClicked }) {
               </div>
             );
           })}
+          <div className="friends-list__log-out">
+            <button onClick={logout}>Log Out</button>
+          </div>
         </div>
       </div>
       {modal ? <AddFriendModal setModal={setModal} /> : ""}

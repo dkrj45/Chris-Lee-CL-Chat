@@ -1,79 +1,101 @@
-@use '../../../styles/partials/fonts' as *;
-@use '../../../styles/partials/colors' as *;
-@use '../../../styles/partials/mixins' as *;
-@use '../../../styles/partials/variables' as *;
+@use "../../../styles/partials/fonts" as *;
+@use "../../../styles/partials/colors" as *;
+@use "../../../styles/partials/mixins" as *;
+@use "../../../styles/partials/variables" as *;
 
 .friends-list {
-    width: 30%;
-    min-height: 100vh;
-    background-color: $charcoal;
+  width: 30%;
+  min-height: 100vh;
+  background-color: $charcoal;
+  position: relative;
 
-    @include tablet {
-        width: 375px;
+  @include tablet {
+    width: 375px;
+  }
+
+  &__add {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    border-bottom: 1px solid white;
+
+    &-text {
+      color: $white;
+      margin: 0;
     }
 
-    &__add {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 1rem;
-        border-bottom: 1px solid white;
+    &-button {
+      background-color: $sunglow;
+      border: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      padding: 5px 10px;
 
-        &-text {
-            color: $white;
-            margin: 0;
-        }
-
-        &-button{
-            background-color: $sunglow;
-            border: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            padding: 5px 10px;
-
-            &:hover {
-                background-color: $orange;
-            }
-        }
+      &:hover {
+        background-color: $orange;
+      }
     }
+  }
 
-    &__list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__friend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+    border-bottom: 1px solid $white;
+
+    &:hover {
+      background-color: $darkgrey;
     }
+  }
 
-    &__friend {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        width: 100%;
-        border-bottom: 1px solid $white;
+  &__status--available {
+    background-color: $teagreen;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+  }
 
-        &:hover {
-            background-color: $darkgrey;
-        }
+  &__name {
+    color: $white;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  &__status--unavailable {
+    @extend .friends-list__status--available;
+    background-color: red;
+  }
+
+  &__log-out {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+
+    button {
+      background-color: $sunglow;
+      width: 100%;
+      border-radius: 5px;
+      padding: 10px;
+      color: $darkpurple;
+
+      &:hover {
+        background-color: $orange;
+      }
     }
-
-    &__status--available {
-        background-color: $teagreen;
-        border-radius: 50%;
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: 1rem;
-    }
-
-    &__name {
-        color: $white;
-        font-size: 1rem;
-        margin: 0;
-    }
-
-    &__status--unavailable {
-        @extend .friends-list__status--available;
-        background-color: red;
-    }
+  }
 }

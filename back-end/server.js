@@ -55,6 +55,7 @@ if (process.env.NODE_ENV === "production") {
 io.use(wrap(sessionMiddleware));
 io.use(authorizeUser);
 io.on("connect", (socket) => {
+  console.log("socket connected");
   initializeUser(socket);
 
   socket.on("add_friend", (friendName, cb) => {
