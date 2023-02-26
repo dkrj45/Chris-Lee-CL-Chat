@@ -1,2 +1,7 @@
 *.env
 .DS_Store
+*.pem
+output
+*.tar
+*.tar.gz
+connect.sh
