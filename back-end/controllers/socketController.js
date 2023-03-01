@@ -61,6 +61,7 @@ module.exports.addFriend = async (socket, friendName, cb) => {
     -1
   );
   console.log(currentFriendList);
+  console.log(socket.user);
   if (Object.values(friend).length === 0) {
     cb({ done: false, errorMsg: "User does not exist." });
     return;
@@ -77,6 +78,17 @@ module.exports.addFriend = async (socket, friendName, cb) => {
     `friends:${socket.user.username}`,
     [friendName, friend.userid].join(".")
   );
+  await redisClient.lpush(
+    `friends:${friendName}`,
+    [socket.user.username, socket.user.userid].join(".")
+  );
+  const friendFriendList = await redisClient.lrange(
+    `friends:${friendName}`,
+    0,
+    -1
+  );
+  const parsedFriendFriendList = await parseFriendList(friendFriendList);
+  socket.to(friend.userid).emit("friends", parsedFriendFriendList);
   const newFriend = {
     username: friendName,
     userid: friend.userid,
