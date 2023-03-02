@@ -1,13 +1,17 @@
 import "./Chat.scss";
 import back from "../../../assets/icons/back.png";
-import socket from "../../../socket";
 import { useContext } from "react";
-import { MessagesContext } from "../../../pages/HomePage/HomePage";
+import {
+  MessagesContext,
+  SocketContext,
+} from "../../../pages/HomePage/HomePage";
 import { AccountContext } from "../../AccountContext";
+import { v4 as uuidv4 } from "uuid";
 
 function Chat({ activeFriend, onReturn }) {
   const { messages, setMessages } = useContext(MessagesContext);
   const { user } = useContext(AccountContext);
+  const { socket } = useContext(SocketContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,9 +41,13 @@ function Chat({ activeFriend, onReturn }) {
           )
           .map((message) =>
             message.to === activeFriend.userid ? (
-              <p className="chat__message--me">{message.content}</p>
+              <p key={uuidv4()} className="chat__message--me">
+                {message.content}
+              </p>
             ) : (
-              <p className="chat__message">{message.content}</p>
+              <p key={uuidv4()} className="chat__message">
+                {message.content}
+              </p>
             )
           )}
       </div>

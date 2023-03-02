@@ -2,14 +2,14 @@ import "./FriendsList.scss";
 import search from "../../../assets/icons/search.png";
 import AddFriendModal from "../AddFriendModal/AddFriendModal";
 import { useContext, useState } from "react";
-import { FriendContext } from "../../../pages/HomePage/HomePage";
+import { FriendContext, SocketContext } from "../../../pages/HomePage/HomePage";
 import { AccountContext } from "../../AccountContext";
-import socket from "../../../socket";
 
 function FriendsList({ onFriendClicked }) {
   const { friends, setFriends } = useContext(FriendContext);
   const [modal, setModal] = useState(false);
   const { setUser } = useContext(AccountContext);
+  const { socket } = useContext(SocketContext);
 
   const addFriend = () => {
     setModal(true);
@@ -17,6 +17,7 @@ function FriendsList({ onFriendClicked }) {
 
   const logout = () => {
     setUser({ loggedIn: false });
+    localStorage.removeItem("token");
     socket.disconnect();
   };
 

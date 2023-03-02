@@ -5,7 +5,6 @@ require("dotenv").config();
 const helmet = require("helmet");
 const { Server } = require("socket.io");
 const authRouter = require("./routes/authRouter");
-const { sessionMiddleware, wrap } = require("./controllers/serverController");
 const {
   authorizeUser,
   initializeUser,
@@ -40,8 +39,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(sessionMiddleware);
-
 app.use("/api/auth", authRouter);
 
 if (process.env.NODE_ENV === "production") {
@@ -51,8 +48,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(staticDir, "index.html"));
   });
 }
-
-io.use(wrap(sessionMiddleware));
 io.use(authorizeUser);
 io.on("connect", (socket) => {
   console.log("socket connected");

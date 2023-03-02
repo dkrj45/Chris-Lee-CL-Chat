@@ -1,12 +1,12 @@
 import "./AddFriendModal.scss";
-import socket from "../../../socket";
 import { useContext, useState } from "react";
-import { FriendContext } from "../../../pages/HomePage/HomePage";
+import { FriendContext, SocketContext } from "../../../pages/HomePage/HomePage";
 
 const AddFriendModal = ({ setModal }) => {
   const [error, setError] = useState("");
 
   const { setFriends } = useContext(FriendContext);
+  const { socket } = useContext(SocketContext);
 
   const removeModal = () => {
     setModal(false);
@@ -47,7 +47,7 @@ const AddFriendModal = ({ setModal }) => {
         </div>
         <form onSubmit={submitHandler}>
           <label className="modal__form-label">
-            Friend's name
+            Friend's Username
             <input
               className="modal__form-name"
               type="text"

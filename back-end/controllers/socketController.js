@@ -1,16 +1,22 @@
 const redisClient = require("../redis");
+const { jwtVerify } = require("./jwt/jwtAuth");
+require("dotenv").config();
 
 module.exports.authorizeUser = (socket, next) => {
-  if (!socket.request.session || !socket.request.session.user) {
-    console.log("Bad Request");
-    next(new Error("Not authorized"));
-  } else {
-    next();
-  }
+  const token = socket.handshake.auth.token;
+
+  jwtVerify(token, process.env.JWT_SECRET)
+    .then((decoded) => {
+      socket.user = { ...decoded };
+      next();
+    })
+    .catch((err) => {
+      console.log("Bad Request", err);
+      next(new Error("Not authorized"));
+    });
 };
 
 module.exports.initializeUser = async (socket) => {
-  socket.user = { ...socket.request.session.user };
   socket.join(socket.user.userid);
   await redisClient.hset(
     `userid:${socket.user.username}`,
@@ -54,14 +60,11 @@ module.exports.addFriend = async (socket, friendName, cb) => {
     return;
   }
   const friend = await redisClient.hgetall(`userid:${friendName}`);
-  console.log("friend:", friend);
   const currentFriendList = await redisClient.lrange(
     `friends:${socket.user.username}`,
     0,
     -1
   );
-  console.log(currentFriendList);
-  console.log(socket.user);
   if (Object.values(friend).length === 0) {
     cb({ done: false, errorMsg: "User does not exist." });
     return;

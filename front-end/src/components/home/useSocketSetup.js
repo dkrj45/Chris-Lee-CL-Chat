@@ -1,8 +1,7 @@
 import { useContext, useEffect } from "react";
-import socket from "../../socket";
 import { AccountContext } from "../AccountContext";
 
-const useSocketSetup = (setFriends, setMessages) => {
+const useSocketSetup = (setFriends, setMessages, socket) => {
   const { setUser } = useContext(AccountContext);
   useEffect(() => {
     socket.connect();
@@ -34,7 +33,7 @@ const useSocketSetup = (setFriends, setMessages) => {
       socket.off("friends");
       socket.off("messages");
     };
-  }, [setUser, setFriends, setMessages]);
+  }, [setUser, setFriends, setMessages, socket]);
 };
 
 export default useSocketSetup;
