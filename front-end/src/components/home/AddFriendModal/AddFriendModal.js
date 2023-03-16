@@ -52,7 +52,7 @@ const AddFriendModal = ({ setModal }) => {
               className="modal__form-name"
               type="text"
               name="name"
-              placeholder="chris"
+              placeholder="Chris Lee"
             ></input>
           </label>
           <button className="modal__form-button">Add</button>
