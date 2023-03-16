@@ -100,13 +100,10 @@ function SignupPage() {
         })
         .then((data) => {
           if (!data) return;
-          console.log("here2.5");
-          console.log(data);
           setUser({ ...data });
           if (data.status) {
             setError(data.status);
           } else if (data.loggedIn) {
-            console.log("here4");
             setError();
             localStorage.setItem("token", data.token);
             navigate("/HomePage");
